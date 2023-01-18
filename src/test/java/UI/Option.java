@@ -24,7 +24,7 @@ public class Option {
     static final Supplier<BrowserType.LaunchOptions> launchOptions = () ->
             new BrowserType.LaunchOptions()
                     .setSlowMo(1000)
-                    .setHeadless(false)
+                    .setHeadless(true)
                     .setDownloadsPath(Paths.get("downloads"));
 
     static final Supplier<Browser.NewContextOptions> contextOptions = () ->
