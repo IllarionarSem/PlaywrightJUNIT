@@ -21,10 +21,9 @@ public abstract class BaseTest {
     private TestInfo testInfo;
 
     @BeforeAll
-    public void launchBrowser() throws IOException {
+    public void launchBrowser() {
         playwright = Playwright.create();
         browser = getBrowserType().launch(Option.launchOptions.get());
-        FileUtils.cleanDirectory("tracing");
     }
 
     @AfterAll
