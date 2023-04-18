@@ -1,9 +1,9 @@
-package page;
+package page.modules;
 
 import com.microsoft.playwright.Page;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public abstract class Form {
-    protected final Page page;
+public abstract class BaseForm {
+    protected Page page;
 }

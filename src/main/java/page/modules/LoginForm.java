@@ -1,8 +1,8 @@
-package page;
+package page.modules;
 
 import com.microsoft.playwright.Page;
 
-public class LoginForm extends Form {
+public class LoginForm extends BaseForm {
 
     private final String commonTxtLoc = "//input[@name='%s']";
     private final String submitBtnLoc = "//button[@type='submit']";

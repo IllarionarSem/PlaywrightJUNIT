@@ -1,8 +1,8 @@
-package page;
+package page.modules;
 
 import com.microsoft.playwright.Page;
 
-public class MessageForm extends Form {
+public class MessageForm extends BaseForm {
     public static final String LOGGED_INTO_MSG = "logged into";
     public static final String LOGGED_OUT_MSG = "logged out";
 

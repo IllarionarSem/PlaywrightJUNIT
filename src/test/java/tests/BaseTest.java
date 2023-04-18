@@ -1,4 +1,4 @@
-package UI;
+package tests;
 
 import com.microsoft.playwright.*;
 import lombok.extern.slf4j.Slf4j;
@@ -12,12 +12,13 @@ import java.io.IOException;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class BaseTest {
 
-    //     Shared between all tests in the class.
+    // Shared between all tests in the class.
     protected Playwright playwright;
     protected Browser browser;
     // New instance for each test method.
     protected BrowserContext context;
     protected Page page;
+
     private TestInfo testInfo;
 
     @BeforeAll
@@ -27,7 +28,8 @@ public abstract class BaseTest {
     }
 
     @AfterAll
-    public void closeBrowser() {
+    public void closeBrowser() throws IOException {
+        FileUtils.cleanDirectory("src/test/resources/storagestate");
         playwright.close();
     }
 
@@ -41,7 +43,7 @@ public abstract class BaseTest {
 
     @AfterEach
     public void closeContext() {
-        context.tracing().stop(Option.getStopTracingOptions(testInfo.getDisplayName()));
+        context.tracing().stop(Option.stopTracingOptions.apply(testInfo.getTestMethod().get().getName()));
         context.close();
     }
 
@@ -51,8 +53,10 @@ public abstract class BaseTest {
                 yield playwright.chromium();
             case "FIREFOX":
                 yield playwright.firefox();
-            default:
-                yield null;
+            default: {
+                log.warn("Browser type is not covered, chrome by default");
+                yield playwright.chromium();
+            }
         };
     }
 }
